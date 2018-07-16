@@ -1,0 +1,26 @@
+{
+  "name": "dnd-note",
+  "version": "1.0.0",
+  "description": "DND Note Application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack:osx": "electron-packager . SoundControl --out=dist/osx --platform=darwin --arch=x64 --icon=build/icon.icns",
+    "pack:win64": "electron-packager . SoundControl --out=dist/ --icon=build/icon.ico",
+    "build": "npm run pack:osx && npm run pack:win64"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MGelein/dnd-note.git"
+  },
+  "author": "Mees Gelein",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MGelein/dnd-noteissues"
+  },
+  "homepage": "https://github.com/MGelein/dnd-note#readme",
+  "devDependencies": {
+    "electron": "^2.0.1",
+    "electron-packager": "^12.1.0"
+  }
+}
