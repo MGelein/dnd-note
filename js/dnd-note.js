@@ -5,8 +5,8 @@ var converter;
  * Entry point for all the code
  */
 $(document).ready(function(){
-    //Load campaigns file
-    load("notes/campaigns.md");
+    //Load main index file
+    load("index.md");
     
     //Initialize markdown convertor
     converter = new showdown.Converter({tables: true});
@@ -18,10 +18,20 @@ $(document).ready(function(){
  * hierearchy!
  */
 function load(url){
-    $.get(url, function(data){
+    $.get("notes/" + url, function(data){
         var html = convert(data);
         html = replaceSymbols(html);
         $("body").html(html);
+
+        //Intercept clicking on a link and make it try to load the Markdown file of that link
+        $('a').each(function(index, value){
+            //First swap href and file attribute
+            $(this).attr('file', $(this).attr('href'));
+            //prevent links from working normally
+            $(this).attr('href', '#');
+        }).unbind('click').click(function(){
+            load($(this).attr('file'));
+        });
     });
 }
 
