@@ -24,14 +24,16 @@ Pagebreak
 
 Multiple columns?
 
-> ## Sinister Vanilla Dragon
-> *Medium guy, weird netral*
->
-> - **AC:** 10
-> - **HP:** 125 (1d4+2)
-> 
-> |STR|DEX|CONT|INT|WIS|CHA
-> |:---:||:---:|:---:|:---:||:---:|:---:|
-> |7 (-2)|8 (-2)|14 (+2)|19 (-1)|21 (-5)|25 (-2)|
-> 
-> *** False Appearance *** This is indistinguishable
+### Initiative
+| Name | Initiative |
+|:---:|:---:|
+| Nimriel | INITIATIVE |
+| Syrina | INITIATIVE |
+| Riswyn | INITIATIVE |
+
+### Hitpoint Tracker
+| Name | Hitpoints |
+|:--:|:---:|
+| Goblin A | HITPOINTS |
+| Goblin B | HITPOINTS |
+| Goblin C | HITPOINTS |

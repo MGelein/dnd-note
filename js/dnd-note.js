@@ -9,7 +9,7 @@ $(document).ready(function(){
     load("notes/campaigns.md");
     
     //Initialize markdown convertor
-    converter = new showdown.Converter();
+    converter = new showdown.Converter({tables: true});
 });
 
 /**
@@ -19,8 +19,22 @@ $(document).ready(function(){
  */
 function load(url){
     $.get(url, function(data){
-        $("body").html(convert(data));
+        var html = convert(data);
+        html = replaceSymbols(html);
+        $("body").html(html);
     });
+}
+
+/**
+ * Checks for any of the agreed upon symbols in the text and replaces them
+ * for the appropriate HTML elements
+ */
+function replaceSymbols(html){
+    //Initiative number input textfield
+    html = html.replace(/INITIATIVE/g, '<input type="number" size="3">');
+    //Hp number input textfield
+    html = html.replace(/HITPOINTS/g, '<input type="number" size="3">');
+    return html;
 }
 
 /**
