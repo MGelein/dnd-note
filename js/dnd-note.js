@@ -1,14 +1,15 @@
+/**Markdown convertor using Showndown JS */
+var converter;
+
 /**
  * Entry point for all the code
  */
 $(document).ready(function(){
-    load("notes/campaigns.txt");
-
+    //Load campaigns file
+    load("notes/campaigns.md");
     
-    var convertor = new showdown.Converter();
-    var text = "# Hello World";
-    var html = convertor.makeHtml(text);
-    console.log(html);
+    //Initialize markdown convertor
+    converter = new showdown.Converter();
 });
 
 /**
@@ -18,6 +19,14 @@ $(document).ready(function(){
  */
 function load(url){
     $.get(url, function(data){
-        console.log(data);
+        $("body").html(convert(data));
     });
+}
+
+/**
+ * Converts the given markdown string into HTML
+ * @param {String} markdown 
+ */
+function convert(markdown){
+    return converter.makeHtml(markdown);
 }
