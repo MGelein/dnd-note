@@ -1,1 +1,26 @@
-    
+img{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+
+.imageLarge{
+    width: 200%;
+}
+
+.image{
+    width: 100%;
+}
+
+.imageMedium{
+    width: 70%;
+}
+
+.imageSmall{
+    width: 50%;
+}
+
+.imageTiny{
+    width: 25%;
+}

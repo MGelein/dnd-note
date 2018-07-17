@@ -32,6 +32,35 @@ function load(url){
         }).unbind('click').click(function(){
             load($(this).attr('file'));
         });
+
+        //Add image class to all images
+        $('img').each(function(index, value){
+            $(this).attr('src', 'notes/' + $(this).attr('src'));
+            let imageClass = "image";
+            //Now switch class depending on image alt
+            switch($(this).attr('alt').toLowerCase()){
+            case "large":
+                imageClass = "imageLarge";
+                break;
+            case 'medium':
+                imageClass = "imageMedium";
+                break;
+            case "small":
+                imageClass = "imageSmall";
+                break;
+            case "tiny":
+                imageClass = "imageTiny";
+                break;
+            case 'orig':
+                imageClass = "";
+                break;
+            case "normal":
+            default:
+                imageClass = "image";
+            }
+
+            $(this).addClass(imageClass);
+        });
     });
 }
 

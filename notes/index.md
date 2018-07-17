@@ -24,12 +24,6 @@ Darmandos is het land waarin mijn meest recente campaign zich afspeelt. Het land
 
 Klik [hier](darmandos/index.md) voor de beginpagina van **Darmandos**.
 
-IMAGE(img/battlenerds.png)
-
-```
-COL
-```
-
 ### Wyldra
 Wyldra is de eerste campaign die ik ben begonnen. Daarom zitten er vast allerlei fouten in, maar op dit moment blijft het een supergave campaign om te DM'en. Er is politiek niet veel aan het oppervlak aan de hand, maar de opkomst van een cult, een goblin leger en andere plaatselijke gevolgen lijken nog meer dan voldoende inspiratie te geven voor de komende sessies. 
 
@@ -40,4 +34,8 @@ Enoden is tegenover Wyldra wat de Hobbit is tegenover LoTR. Serieuzer en grootse
 
 Klik [hier](enoden/index.md) voor de beginpagina van **Enoden**.
 
-
+```
+COL
+```
+### Help
+Het is soms best lastig om alle opties te onthouden die je allemaal verzonnen hebt om het editen van je notities makkelijker te maken. Daarom kan je hier linken naar de [help](help.md) pagina om je te helpen met herinneren.
