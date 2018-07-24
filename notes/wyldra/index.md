@@ -4,4 +4,4 @@ Het continent van standaard fantasy. Je kunt het Fantasyland noemen. Hoe je het 
 ```
 COL
 ```
-![LARGE](map/wyldra/map.png)
+

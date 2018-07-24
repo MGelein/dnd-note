@@ -39,3 +39,4 @@ COL
 ```
 ### Help
 Het is soms best lastig om alle opties te onthouden die je allemaal verzonnen hebt om het editen van je notities makkelijker te maken. Daarom kan je hier linken naar de [help](help.md) pagina om je te helpen met herinneren.
+
