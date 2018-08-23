@@ -1,0 +1,27 @@
+/**
+HTML Overrides
+**/
+
+/**
+Bootstrap overrides
+**/
+
+/**
+Custom
+**/
+
+/**
+IDs
+**/
+#toolbar, #content{
+    width: 100vw;
+    border: 1px solid black;
+}
+
+#toolbar{
+    height: 5vh;
+}
+
+#content{
+    height: 95vh;
+}
