@@ -30,7 +30,12 @@ var ui = {};
 
             //Only update if this was last change   
             if(ui.updateTimeout.length < 1){
-                $('#preview').html(marked($('#editor').val()));
+                //First check for symbols and do other pre-processing
+                let mdCode = $('#editor').val();
+                mdCode = editor.preProcess(mdCode);
+
+                //Now convert the data into HTML
+                $('#preview').html(marked(mdCode));
 
                 //Overwrite default link behaviuor
                 $('#preview a').click(function(e){
