@@ -48,7 +48,7 @@ IDs
     height: 5vh;
 }   
 
-#content, #music, #notes, #overview{
+#content, #music, #notes, #overview, #noteEditor, #notePreview{
     height: 95vh;
 }
 
@@ -58,9 +58,4 @@ IDs
 
 #notes{
     width: 90vw;
-}
-
-#noteEditor, #notePreview{
-    width: 50%;
-    height: 95vh;
 }
