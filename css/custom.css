@@ -14,6 +14,11 @@ div{
     transition: width 0.5s;
 }
 
+textarea{
+    font-family: monospace;
+    font-size: 16px;
+}
+
 /**
 Bootstrap overrides
 **/
@@ -36,7 +41,7 @@ Custom Classes
 /**
 IDs
 **/
-#content, #music, #notes, #overview, #noteEditor, #notePreview{
+#music, #notes, #overview{
     border: 1px solid black;
 }
 
@@ -58,4 +63,16 @@ IDs
 
 #notes{
     width: 90vw;
+    padding: 2px;
+}
+
+#editor, #preview{
+    border: 1px solid grey;
+    width: 100%;
+    height: 100%;
+    padding: 4px;
+}
+
+#preview{
+    padding: 2em;
 }

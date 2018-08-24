@@ -11,9 +11,9 @@
 <body>
 	<div id="toolbar">
 		<div class="btn-group" id="notesViewBtn" role="group">
-			<button type="button" id="viewEditorBtn" onclick="ui.setNotesView(ui.notesView.EDITOR);" class="btn btn-outline-primary">Edit</button>
+			<button type="button" id="viewEditorBtn" onclick="ui.setNotesView(ui.notesView.EDITOR);" class="btn btn-primary">Edit</button>
 			<button type="button" id="viewSplitBtn" onclick="ui.setNotesView(ui.notesView.SPLIT_1);" class="btn btn-outline-primary">Split</button>
-			<button type="button" id="viewPreviewBtn" onclick="ui.setNotesView(ui.notesView.PREVIEW);" class="btn btn-primary">Preview</button>
+			<button type="button" id="viewPreviewBtn" onclick="ui.setNotesView(ui.notesView.PREVIEW);" class="btn btn-outline-primary">Preview</button>
 		</div>
 	</div>
 	<div id="content">
@@ -21,13 +21,13 @@
 			<p class="text-center">Overview</p>
 		</div>
 		<div id="notes">
-			<div id="noteEditor" class="noWidth">
-				<div id="editor" contenteditable="true" class="">
-					# Test Content
-				</div>
+			<div id="noteEditor" class="wholeWidth">
+				<textarea id="editor"></textarea>
 			</div>
-			<div id="notePreview" class="wholeWidth">
-
+			<div id="notePreview" class="noWidth" style="display:none">
+				<div id="preview">
+					
+				</div>
 			</div>
 		</div>
 		<div id="music">
@@ -40,6 +40,7 @@
 	<script src="js/marked.min.js"></script>
 	<script src="js/jquery.js"></script>
 	<script src="js/ui.js"></script>
+	<script src="js/io.js"></script>
 	<script src="js/dnd-note.js"></script>
 	<script>if (window.module) module = window.module;</script>
 </body>

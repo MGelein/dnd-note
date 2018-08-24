@@ -10,13 +10,52 @@ var ui = {};
      * Adds starting event listeners to buttons and other components
      */
     ui.addListeners = function(){
+        $('#editor').keyup(ui.updatePreview);
     };
+
+    //This array holds random values, if empty, it means no key was pressed recently
+    ui.updateTimeout = [];
+
+    /**
+     * Updates the MD preview
+     */
+    ui.updatePreview = function(){
+        //Add a random value to the timeout array
+        var r = Math.random();
+        ui.updateTimeout.push(r);
+        //Now wait for some time and remove it again, checking if this was the last one
+        setTimeout(function(){
+            let index = ui.updateTimeout.indexOf(r);
+            ui.updateTimeout.splice(index, 1);
+
+            //Only update if this was last change   
+            if(ui.updateTimeout.length < 1){
+                $('#preview').html(marked($('#editor').val()));
+
+                //Overwrite default link behaviuor
+                $('#preview a').click(function(e){
+                    //Prevent default behaviour
+                    e.preventDefault();
+                    //If this is a md file, load it.
+                    let fileName = $(this).attr('href').toLowerCase();
+                    let fileExt = fileName.substr(fileName.lastIndexOf("."));
+                    if(fileExt === ".md"){
+                        //Load the file
+                        let file = io.load(fileName);
+                        $('#editor').val(file);
+                        ui.updateTimeout = [];
+                        ui.updatePreview();
+                    }
+                });
+            }
+        }, 200);
+    }
 
     /**
      * Possible values for the notesview
      */
     ui.notesView = {
-        CURRENT: 0,
+        CURRENT: 2,
         PREVIEW: 0,
         SPLIT_1 : 1,
         EDITOR : 2,
