@@ -10,7 +10,11 @@
 
 <body>
 	<div id="toolbar">
-		<p class="text-center">Toolbar</p>
+		<div class="btn-group" id="notesViewBtn" role="group">
+			<button type="button" id="viewEditorBtn" onclick="ui.setNotesView(ui.notesView.EDITOR);" class="btn btn-outline-primary">Edit</button>
+			<button type="button" id="viewSplitBtn" onclick="ui.setNotesView(ui.notesView.SPLIT_1);" class="btn btn-outline-primary">Split</button>
+			<button type="button" id="viewPreviewBtn" onclick="ui.setNotesView(ui.notesView.PREVIEW);" class="btn btn-primary">Preview</button>
+		</div>
 	</div>
 	<div id="content">
 		<div id="overview">
@@ -18,7 +22,9 @@
 		</div>
 		<div id="notes">
 			<div id="noteEditor" class="noWidth">
-
+				<div id="editor" contenteditable="true" class="">
+					# Test Content
+				</div>
 			</div>
 			<div id="notePreview" class="wholeWidth">
 
@@ -28,7 +34,7 @@
 			<p class="text-center">Music</p>
 		</div>
 	</div>
-	
+
 	<!-- SCRIPTS -->
 	<script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
 	<script src="js/marked.min.js"></script>

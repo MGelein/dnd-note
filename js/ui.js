@@ -10,9 +10,6 @@ var ui = {};
      * Adds starting event listeners to buttons and other components
      */
     ui.addListeners = function(){
-        $("#notes").click(function(){
-            ui.toggleNotesView();
-        });
     };
 
     /**
@@ -43,6 +40,8 @@ var ui = {};
      * @param {Integer} notesView 
      */
     ui.setNotesView = function(notesView){
+        //Update the global current value
+        ui.notesView.CURRENT = notesView;
         //First fetch the two parts we need to edit, and remove any width classes.
         let preview = $('#notePreview');
         let editor = $('#noteEditor');
@@ -52,22 +51,55 @@ var ui = {};
         //Now see what we have to set them to
         switch(notesView){
             case ui.notesView.EDITOR:
-                console.log('set to EDITOR');
+                //Set widths
                 preview.addClass("noWidth");
                 editor.addClass("wholeWidth");
+                //Manage visibility
+                (preview.is(":visible")) ? preview.fadeOut(): undefined;
+                (editor.is(":visible")) ? undefined: editor.fadeIn();
+                ui.updateNotesViewButton();
             break;
             case ui.notesView.SPLIT_1:
             case ui.notesView.SPLIT_2:
-                console.log("set to SPLIT");
                 preview.addClass("halfWidth");
                 editor.addClass("halfWidth");
+                //Manage visibility
+                (preview.is(":visible")) ? undefined: preview.fadeIn();
+                (editor.is(":visible")) ? undefined: editor.fadeIn();
+                ui.updateNotesViewButton();
             break;
             default:
             case ui.notesView.PREVIEW:
-                console.log("set to PREVIEW");
                 preview.addClass("wholeWidth");
                 editor.addClass("noWidth");
+                //Manage visibility
+                (preview.is(":visible")) ? undefined: preview.fadeIn();
+                (editor.is(":visible")) ? editor.fadeOut(): undefined;
+                ui.updateNotesViewButton();
             break;
         }
     };
+
+    /**
+     * Updates the noteViewButtongroup to reflect the current view
+     * status of the notes editor
+     */
+    ui.updateNotesViewButton = function(){
+        //First set all buttons to outline
+        $('#notesViewBtn button').removeClass("btn-primary btn-outline-primary").addClass("btn-outline-primary");
+        //Now set the right one to no outline
+        switch(ui.notesView.CURRENT){
+            case ui.notesView.EDITOR:
+                $("#viewEditorBtn").removeClass("btn-outline-primary").addClass("btn-primary");
+                break;
+            case ui.notesView.PREVIEW:
+                $("#viewPreviewBtn").removeClass("btn-outline-primary").addClass("btn-primary");
+                break;
+            case ui.notesView.SPLIT_1:
+            case ui.notesView.SPLIT_2:
+                $("#viewSplitBtn").removeClass("btn-outline-primary").addClass("btn-primary");
+                break;
+        };
+    };
+
 })(ui);

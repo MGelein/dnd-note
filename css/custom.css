@@ -36,7 +36,7 @@ Custom Classes
 /**
 IDs
 **/
-#toolbar, #content, #music, #notes, #overview, #noteEditor, #notePreview{
+#content, #music, #notes, #overview, #noteEditor, #notePreview{
     border: 1px solid black;
 }
 
@@ -45,8 +45,8 @@ IDs
 }
 
 #toolbar{
-    height: 5vh;
-}   
+    padding: 2px;
+}
 
 #content, #music, #notes, #overview, #noteEditor, #notePreview{
     height: 95vh;
