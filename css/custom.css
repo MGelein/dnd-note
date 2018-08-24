@@ -10,6 +10,8 @@ div{
     padding: 0;
     display: block; 
     float: left;
+    -webkit-transition: width 0.5s; /* Safari */
+    transition: width 0.5s;
 }
 
 /**
@@ -17,13 +19,24 @@ Bootstrap overrides
 **/
 
 /**
-Custom
+Custom Classes
 **/
+.halfWidth{
+    width: 50%;
+}
+
+.noWidth{
+    width: 0%;
+}
+
+.wholeWidth{
+    width: 100%;
+}
 
 /**
 IDs
 **/
-#toolbar, #content, #music, #notes, #overview{
+#toolbar, #content, #music, #notes, #overview, #noteEditor, #notePreview{
     border: 1px solid black;
 }
 
@@ -45,4 +58,9 @@ IDs
 
 #notes{
     width: 90vw;
+}
+
+#noteEditor, #notePreview{
+    width: 50%;
+    height: 95vh;
 }
