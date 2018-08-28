@@ -31,7 +31,20 @@ var overview = {};
                 $(this).parent().find("ul").show();
             }
         });
-    }
+        //Prevent default link clicking
+        $('#overview a').unbind('click').click(function(event){
+            event.preventDefault();
+            //Now handle click based on what this is
+            if($(this).parent().has("ul").length > 0){//This is a dir
+                
+            }else{//This is a file, switch based on that
+                let fileName = $(this).attr('href');
+                if(io.isMarkdown(fileName)){
+                    editor.load(fileName);
+                }
+            }
+        });
+    }   
 
     /**
      * Renders the provided folder object

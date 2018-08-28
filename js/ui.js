@@ -85,10 +85,7 @@ var ui = {};
                     let fileExt = fileName.substr(fileName.lastIndexOf("."));
                     if(fileExt === ".md"){
                         //Load the file
-                        let file = io.load(fileName);
-                        $('#editor').val(file);
-                        ui.updateTimeout = [];
-                        ui.updatePreview();
+                        editor.load(fileName);
                     }
                 });
 

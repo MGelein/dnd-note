@@ -40,6 +40,7 @@ function Ini(url){
      */
     this.set = function(key, value){
         this.map[key] = "" + value;
+        this.save();
     }
 
     /**

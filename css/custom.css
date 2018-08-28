@@ -23,6 +23,11 @@ ul{
     list-style-type: none;
     padding-left: 8px;
     border-left: 1px solid rgb(184, 184, 184);
+    width: 100%;
+}
+
+li{
+    width: 100%;
 }
 
 img{
@@ -47,6 +52,14 @@ Custom Classes
 }
 
 .wholeWidth{
+    width: 100%;
+}
+
+.currentFile{
+    border: 1px dotted grey;
+    display: block;
+    font-weight: 500;
+    background-color: rgba(140, 201, 236, 0.308);
     width: 100%;
 }
 
