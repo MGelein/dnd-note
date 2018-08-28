@@ -9,7 +9,7 @@ var ui = {};
     /**
      * Adds starting event listeners to buttons and other components
      */
-    ui.addListeners = function(){
+    ui.init = function(){
         $('#editor').keyup(ui.updatePreview);
     };
 

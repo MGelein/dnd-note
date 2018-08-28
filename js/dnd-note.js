@@ -2,6 +2,10 @@
  * Entry point for all the code
  */
 $(document).ready(function(){
+    //Initialize IO
+    io.init();
     //Add listeners to the ui
-    ui.addListeners();
+    ui.init();
+    //Initialize the overview
+    overview.init();
 });

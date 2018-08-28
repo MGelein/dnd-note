@@ -10,6 +10,12 @@ var io = {};
  * Anonymoos wrapper function
  */
 (function(io){
+
+    /**Initialzies IO functionality, basically mostly checks current working DIR */
+    io.init = function(){
+        io.directory = "..//" + __dirname.substr(__dirname.lastIndexOf("\\") + 1);
+    }
+
     /**
      * Loads the file designated by the provided url
      * @param {String} url 
@@ -47,6 +53,9 @@ var io = {};
             if(file.indexOf('.') == 0) return;
             //Else check if this is a directory
             if(fs.lstatSync(path + "/" + file).isDirectory()){
+                //First check if this is not the directory of the application
+                if(path + "/" + file === io.directory) return;
+                //If this is not the case, please expand the tree
                 object[file] = {};
                 io.scanDir(path + "/" + file, object[file]);
                 //If this is a file, also add it, if it is allowed
