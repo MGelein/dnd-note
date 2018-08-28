@@ -78,13 +78,34 @@ var io = {};
      * @param {String} file 
      */
     io.isAllowedFileType = function(file){
+        return io.isMarkdown(file) || io.isImage(file);
+    }
+
+    /**
+     * Checks if the provided file type is an image file
+     * @param {String} file 
+     */
+    io.isImage = function(file){
         //First see where, if it is there, the extension is
         let index = file.lastIndexOf(".");
         if(index < 1) return false;
         //Now grab the extension
         let ext = file.substr(index);
-        let extIndex = [".md", ".jpg", ".jpeg", ".png", "bmp", "gif", ".svg"].indexOf(ext.toLowerCase().trim());
+        let extIndex = [".jpg", ".jpeg", ".png", "bmp", "gif", ".svg"].indexOf(ext.toLowerCase().trim());
         //If the extension was in the whitelist, return true
         return (extIndex != -1);
+    }
+
+    /**
+     * Check to see if it is a MD file
+     * @param {String} file 
+     */
+    io.isMarkdown = function(file){
+        //First see where, if it is there, the extension is
+        let index = file.lastIndexOf(".");
+        if(index < 1) return false;
+        //Now grab the extension
+        let ext = file.substr(index);
+        return ext.toLowerCase() == ".md";
     }
 })(io);

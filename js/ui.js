@@ -13,6 +13,35 @@ var ui = {};
         $('#editor').keyup(ui.updatePreview);
     };
 
+    /**
+     * Called when a file is dropped on the editor
+     * @param {Event} event 
+     */
+    ui.editorDrop = function(event){
+        //Stop default response
+        event.preventDefault();
+        //Get the href, and do some magic with it
+        let href = event.dataTransfer.getData("href");
+        if(!href) return;
+        //See what type of file it is
+        if(io.isImage(href)){
+            event.target.insertAtCaret("![](" + href + ")");
+        }else if(io.isMarkdown(href)){
+            event.target.insertAtCaret("INCLUDE(" + href + ")");
+        }
+        //Else do nothing, we don't know what to do with it?
+        //TODO: maybe make this popup as a normal link
+        ui.updatePreview();
+    }
+
+    /**
+     * Called by the links when they get dragged
+     * @param {Event} event 
+     */
+    ui.dragStart = function(event, ref){
+        event.dataTransfer.setData("href", $(ref).attr('href'));
+    }
+
     //This array holds random values, if empty, it means no key was pressed recently
     ui.updateTimeout = [];
 
@@ -51,6 +80,30 @@ var ui = {};
                         ui.updateTimeout = [];
                         ui.updatePreview();
                     }
+                });
+
+
+                //Set image width in percent to the alt-text of the image
+                $('img').each(function(index, image){
+                    //Retrieve ATL attribute, if set, else ignore, just use default settings
+                    let alt = $(this).attr('alt');
+                    if(!alt) return;
+                    //Now check if there is a letter in there, afterwards, remove the letters
+                    alt = alt.toLowerCase();
+                    let float = "left";
+                    //Set float according to letter found
+                    if(alt.indexOf("l") != -1) float = "left";
+                    else if(alt.indexOf("r") != -1) float = "right";
+                    else if(alt.indexOf("c") != -1) float = "center";
+                    float = "float:" + float + ";";
+                    //Now remove that letter
+                    let width = "50";
+                    alt = alt.replace(/[c,l,r]/g, '');
+                    //Check if the part is actually a number
+                    if(!isNaN(alt)) width = alt;
+                    width = "width:" + width + "%;";
+                    //Now set this as the style of the img
+                    $(this).attr("style", width + float);
                 });
             }
         }, 200);

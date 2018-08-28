@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Hello World!</title>
+	<title>DND Note v.0.1</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/fontawesome-all.min.css" rel="stylesheet">
 	<link href="css/custom.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 		</div>
 		<div id="notes">
 			<div id="noteEditor" class="wholeWidth">
-				<textarea id="editor"></textarea>
+				<textarea id="editor" ondrop="ui.editorDrop(event)"></textarea>
 			</div>
 			<div id="notePreview" class="noWidth" style="display:none">
 				<div id="preview">
