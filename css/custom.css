@@ -41,7 +41,7 @@ Custom Classes
 /**
 IDs
 **/
-#music, #notes, #overview{
+#notes, #overview{
     border: 1px solid black;
 }
 
@@ -53,16 +53,16 @@ IDs
     padding: 2px;
 }
 
-#content, #music, #notes, #overview, #noteEditor, #notePreview{
+#content, #notes, #overview, #noteEditor, #notePreview{
     height: 95vh;
 }
 
-#music, #overview{
-    width: 5vw;
+#overview{
+    width: 20vw;
 }
 
 #notes{
-    width: 90vw;
+    width: 80vw;
     padding: 2px;
 }
 

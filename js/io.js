@@ -41,6 +41,13 @@ var io = {};
     }
 
     /**
+     * Updates the tree after something has changed, doesn't change the location
+     */
+    io.updateTree = function(){
+        io.makeTree(io.workLocation);
+    }
+
+    /**
      * Scans the provided location, recursively checks for embedded directories,
      * adds them to the provided object
      * @param {String} path 
