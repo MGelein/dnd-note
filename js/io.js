@@ -30,7 +30,8 @@ var io = {};
         //Create a new empty tree.
         io.workTree = {};
         io.scanDir(io.workLocation, io.workTree);
-        console.log(io.workTree);
+        //Return the result, just to be sure
+        return io.workTree;
     }
 
     /**
@@ -39,7 +40,6 @@ var io = {};
      * @param {String} path 
      */
     io.scanDir = function(path, object){
-        console.log("Scanning directory: " + path);
         //Now scan this dir, recursively.
         let files = fs.readdirSync(path);
         files.forEach(function(file, index){
@@ -49,10 +49,26 @@ var io = {};
             if(fs.lstatSync(path + "/" + file).isDirectory()){
                 object[file] = {};
                 io.scanDir(path + "/" + file, object[file]);
-            //If this is a file, also add it
-            }else{
+                //If this is a file, also add it, if it is allowed
+            }else if(io.isAllowedFileType(file)){
                 object[file] = "file";
             }
         });
+    }
+
+    /**
+     * Checks to see if the extension of the provided file
+     * matches any of the allowed extensions
+     * @param {String} file 
+     */
+    io.isAllowedFileType = function(file){
+        //First see where, if it is there, the extension is
+        let index = file.lastIndexOf(".");
+        if(index < 1) return false;
+        //Now grab the extension
+        let ext = file.substr(index);
+        let extIndex = [".md", ".jpg", ".jpeg", ".png", "bmp", "gif", ".svg"].indexOf(ext.toLowerCase().trim());
+        //If the extension was in the whitelist, return true
+        return (extIndex != -1);
     }
 })(io);

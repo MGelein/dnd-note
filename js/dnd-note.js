@@ -4,6 +4,4 @@
 $(document).ready(function(){
     //Add listeners to the ui
     ui.addListeners();
-
-    io.makeTree(".");
 });
