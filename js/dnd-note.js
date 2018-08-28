@@ -8,6 +8,8 @@ $(document).ready(function () {
     ui.init();
     //Initialize the overview
     overview.init();
+    //Load the ini file
+    ini.init();
 });
 
 //Overwrite TextArea prototype, from (https://stackoverflow.com/questions/11076975/insert-text-into-textarea-at-cursor-position-javascript)

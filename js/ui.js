@@ -23,11 +23,18 @@ var ui = {};
         //Get the href, and do some magic with it
         let href = event.dataTransfer.getData("href");
         if(!href) return;
+        //Clean the url, encode it
+        href = encodeURI(href);
         //See what type of file it is
         if(io.isImage(href)){
-            event.target.insertAtCaret("![](" + href + ")");
+            event.target.insertAtCaret("![50l](" + href + ")");
         }else if(io.isMarkdown(href)){
-            event.target.insertAtCaret("INCLUDE(" + href + ")");
+            if(event.ctrlKey){
+                event.target.insertAtCaret("INCLUDE(" + href + ")");
+            }else{
+                event.target.insertAtCaret("[LINK](" + href + ")");
+            }
+
         }
         //Else do nothing, we don't know what to do with it?
         //TODO: maybe make this popup as a normal link
@@ -47,8 +54,11 @@ var ui = {};
 
     /**
      * Updates the MD preview
+     * @param {Boolean} force set to true, to force update even when preview is not visible
      */
-    ui.updatePreview = function(){
+    ui.updatePreview = function(force){
+        //First check if the preview is even visible, if it isn't ignore the update request.
+        if(!force && !$('#notePreview').is(":visible")) return;
         //Add a random value to the timeout array
         var r = Math.random();
         ui.updateTimeout.push(r);
@@ -129,6 +139,7 @@ var ui = {};
             ui.notesView.CURRENT = 0;
         }
         ui.setNotesView(ui.notesView.CURRENT);
+        //Always update the preview window, in case it comes into view
     };
     
     /**
@@ -137,6 +148,8 @@ var ui = {};
      * @param {Integer} notesView 
      */
     ui.setNotesView = function(notesView){
+        //First update the preview
+        ui.updatePreview(true);
         //Update the global current value
         ui.notesView.CURRENT = notesView;
         //First fetch the two parts we need to edit, and remove any width classes.

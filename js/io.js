@@ -25,6 +25,13 @@ var io = {};
     }
 
     /**
+     * Writes a file to disc, to the specified location
+     */
+    io.save = function(url, data){
+        fs.writeFileSync(url, data);
+    }
+
+    /**
      * Scans a directory relative to the provided location,
      * which is stored in `io.workLocation`.
      * After that, stores this object in `io.workTree`
