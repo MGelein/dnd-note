@@ -11,6 +11,11 @@ var io = {};
  */
 (function(io){
 
+    const FILE = '<i class="fas fa-file-alt"></i>';
+    const IMAGE = '<i class="far fa-file-image"></i>';
+    const AUDIO = '<i class="far fa-file-audio"></i>';
+    
+
     /**Initialzies IO functionality, basically mostly checks current working DIR */
     io.init = function(){
         io.directory = "..//" + __dirname.substr(__dirname.lastIndexOf("\\") + 1);
@@ -85,7 +90,7 @@ var io = {};
      * @param {String} file 
      */
     io.isAllowedFileType = function(file){
-        return io.isMarkdown(file) || io.isImage(file);
+        return io.isMarkdown(file) || io.isImage(file) || io.isAudio(file);
     }
 
     /**
@@ -104,6 +109,20 @@ var io = {};
     }
 
     /**
+     * Check to see if the provided file type is considered an audio file
+     */
+    io.isAudio = function(file){
+         //First see where, if it is there, the extension is
+         let index = file.lastIndexOf(".");
+         if(index < 1) return false;
+         //Now grab the extension
+         let ext = file.substr(index);
+         let extIndex = [".mp3", ".ogg", ".wav", "wma"].indexOf(ext.toLowerCase().trim());
+         //If the extension was in the whitelist, return true
+         return (extIndex != -1);
+    }
+
+    /**
      * Check to see if it is a MD file
      * @param {String} file 
      */
@@ -115,4 +134,15 @@ var io = {};
         let ext = file.substr(index);
         return ext.toLowerCase() == ".md";
     }
+
+    /**
+     *Returns the appropriate ICON for the provided file type 
+     * @param {String} file 
+     */
+    io.getIcon = function(file){
+        if(io.isImage(file)) return IMAGE;
+        else if(io.isAudio(file)) return AUDIO;
+        else return FILE;
+    }
+
 })(io);

@@ -5,8 +5,8 @@ var overview = {};
  */
 (function (overview) {
 
-    const FOLDER = '<i class="fas fa-folder"></i>';
-    const FILE = '<i class="fas fa-file-alt"></i>';
+    const FOLDER_CLOSED = '<i class="fas fa-folder"></i>';
+    const FOLDER_OPEN = '<i class="fas fa-folder-open"></i>';
 
     /**
      * Initializes the overview
@@ -22,21 +22,19 @@ var overview = {};
     overview.viewTree = function () {
         html = overview.renderFolder("", io.workTree, "../");
         $('#overview').html(html);
-        //What happens when you click a list item
-        $('#overview li').has("ul").find("a").unbind('click').click(function(event){
-            //Now check if it is visible
-            if($(this).parent().find("ul").is(":visible")){
-                $(this).parent().find("ul").hide();
-            }else{
-                $(this).parent().find("ul").show();
-            }
-        });
+        
         //Prevent default link clicking
         $('#overview a').unbind('click').click(function(event){
             event.preventDefault();
             //Now handle click based on what this is
             if($(this).parent().has("ul").length > 0){//This is a dir
-                
+                if($(this).parent().find("ul").is(":visible")){
+                    $(this).find("i").removeClass("fa-folder-open").addClass("fa-folder");
+                    $(this).parent().find("ul").hide();
+                }else{
+                    $(this).find("i").removeClass("fa-folder").addClass("fa-folder-open");
+                    $(this).parent().find("ul").show();
+                }
             }else{//This is a file, switch based on that
                 let fileName = $(this).attr('href');
                 if(io.isMarkdown(fileName)){
@@ -44,6 +42,9 @@ var overview = {};
                 }
             }
         });
+
+        //Now click every folder once to collapse everything
+        $('#overview li:has(ul)>a').click();
     }   
 
     /**
@@ -60,11 +61,12 @@ var overview = {};
             //Check what kind of item it is
             if (folder[key] === "file") {//If this is just a file, add it
                 html += "ondragstart='ui.dragStart(event, this)'>";
-                html += FILE + "&nbsp;" + key;
+                html += io.getIcon(key) + "&nbsp;" + key;
                 html += "</a>";
+               
             }else{
                 html += ">"
-                html += FOLDER + "&nbsp;" + key;
+                html += FOLDER_CLOSED + "&nbsp;" + key;
                 html += "</a>";
                 html = overview.renderFolder(html, folder[key], path + "/" + key);
             }
