@@ -7,3 +7,7 @@ The idea with this tool is to offer a cross platform alternative for Microsoft O
 - Drag and drop image support
 - Embedded file browser
 - _Music Support_ (Not completely sure yet, long term goal).
+
+
+## Idea
+A 3D virtual tabletop for the DM notes
