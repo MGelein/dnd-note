@@ -71,7 +71,11 @@ var ui = {};
             if(ui.updateTimeout.length < 1){
                 //First check for symbols and do other pre-processing
                 let mdCode = $('#editor').val();
+                //And save back to disk
+                io.save(editor.currentFile, mdCode);
+                //Now preprocess data
                 mdCode = editor.preProcess(mdCode);
+
 
                 //Now convert the data into HTML
                 $('#preview').html(marked(mdCode));
