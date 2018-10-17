@@ -7,6 +7,7 @@ var overview = {};
 
     const FOLDER_CLOSED = '<i class="fas fa-folder"></i>';
     const FOLDER_OPEN = '<i class="fas fa-folder-open"></i>';
+    const NEW_FILE = '<i class="fas fa-plus"></i>';
 
     /**
      * Initializes the overview
@@ -22,22 +23,22 @@ var overview = {};
     overview.viewTree = function () {
         html = overview.renderFolder("", io.workTree, "../");
         $('#overview').html(html);
-        
+
         //Prevent default link clicking
-        $('#overview a').unbind('click').click(function(event){
+        $('#overview a').unbind('click').click(function (event) {
             event.preventDefault();
             //Now handle click based on what this is
-            if($(this).parent().has("ul").length > 0){//This is a dir
-                if($(this).parent().find("ul").is(":visible")){
+            if ($(this).parent().has("ul").length > 0) {//This is a dir
+                if ($(this).parent().find("ul").is(":visible")) {
                     $(this).find("i").removeClass("fa-folder-open").addClass("fa-folder");
                     $(this).parent().find("ul").hide();
-                }else{
+                } else {
                     $(this).find("i").removeClass("fa-folder").addClass("fa-folder-open");
                     $(this).parent().find("ul").show();
                 }
-            }else{//This is a file, switch based on that
+            } else {//This is a file, switch based on that
                 let fileName = $(this).attr('href');
-                if(io.isMarkdown(fileName)){
+                if (io.isMarkdown(fileName)) {
                     editor.load(fileName);
                 }
             }
@@ -45,7 +46,57 @@ var overview = {};
 
         //Now click every folder once to collapse everything
         $('#overview li:has(ul)>a').click();
-    }   
+
+        //Add listeners for the foldercontrols
+        $('.folderControls i').unbind('click').click(function () {
+            overview.addNewFile(this);
+        });
+    }
+
+    /**
+     * Starts the file creation dialogue
+     * @param {JQueryReference} jqObject 
+     */
+    overview.addNewFile = function (jqObject) {
+        //If we clicked the new file button
+        let folder = $(jqObject).parent().parent();
+        let filelist = folder.find("ul").show();
+        let html = filelist.html();
+        //add the newFile HTML 
+        let newItem = "<li id='newFile'><span contenteditable='true'></span><li>";
+        filelist.html(newItem + html);
+        //Focus the contenteditable
+        let span = $('#newFile span').focus();
+        span.keydown(function(event){
+            //Test if we pressed enter
+            if(event.originalEvent.keyCode == 13){
+                //Okay, store this result
+                overview.makeNewFile();
+            }else if(event.originalEvent.keyCode == 27){//ESC
+                //Ignore result, remove this thing and continue
+                $('#newFile').remove();
+            }
+            let key = event.originalEvent.key;
+            if(!key.match(/[_\-\.a-zA-Z0-9 ]/g)){//Prevent illegal characters
+                event.stopPropagation();
+                return false;
+            }
+        });
+    }
+
+    /**
+     * Creates a new file once the file creation dialog is finished.
+     */
+    overview.makeNewFile = function(){
+        //Get the data from the newfile span
+        let fileName = $('#newFile span').html().trim();
+        //Now remove it
+        $('#newFile').remove();
+        //After that check if the length is ok
+        if(fileName.length == 0) return;
+        //If so, let's continue
+        console.log("Making file: " + fileName);
+    }
 
     /**
      * Renders the provided folder object
@@ -63,11 +114,11 @@ var overview = {};
                 html += "ondragstart='ui.dragStart(event, this)'>";
                 html += io.getIcon(key) + "&nbsp;" + key;
                 html += "</a>";
-               
-            }else{
+
+            } else {
                 html += ">"
                 html += FOLDER_CLOSED + "&nbsp;" + key;
-                html += "</a>";
+                html += "</a><span class='folderControls text-primary'>" + NEW_FILE + "</span>";
                 html = overview.renderFolder(html, folder[key], path + "/" + key);
             }
             //Now close the link item

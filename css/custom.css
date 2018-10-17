@@ -43,6 +43,19 @@ Bootstrap overrides
 /**
 Custom Classes
 **/
+.folderControls{
+    float: right;
+    padding-right: 8px;
+}
+
+.folderControls>i{
+    cursor: pointer;
+}
+
+.folderControls>i:hover{
+    opacity: 0.5;
+}
+
 .halfWidth{
     width: 50%;
 }
@@ -105,4 +118,14 @@ IDs
 
 #preview{
     padding: 2em;
+}
+
+#newFile{
+    padding: 0 0 0 1em;
+    border-radius: 4px;
+}
+
+#newFile > span{
+    width: 100%;
+    display: block;
 }
