@@ -84,9 +84,22 @@ Custom Classes
 IDs
 **/
 #popup{
-    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+    position: absolute;
+    background-color: rgba(240, 240, 255, 0.9);
     border: 1px solid white;
-    border-radius: 1em;
+    border-radius: 4px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+#popup span{
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 0 4px 0 4px;
+}
+
+#popup span:hover{
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 #notes, #overview{

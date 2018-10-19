@@ -11,6 +11,10 @@ var ui = {};
      */
     ui.init = function(){
         $('#editor').keyup(ui.updatePreview);
+        //If you click anywhere outside of the popup, remove the popup
+        $('body').click(function(){
+            $('#popup').hide();
+        });
     };
 
     /**
@@ -190,6 +194,11 @@ var ui = {};
             break;
         }
     };
+
+    /**
+     * The item that was last right clicked
+     */
+    ui.rightClicked;
 
     /**
      * Updates the noteViewButtongroup to reflect the current view

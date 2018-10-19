@@ -13,8 +13,7 @@ var overview = {};
      * Initializes the overview
      */
     overview.init = function () {
-        io.makeTree("../");
-        overview.viewTree();
+        overview.update();
     }
 
     /**
@@ -23,6 +22,23 @@ var overview = {};
     overview.update = function(){
         io.makeTree("../");
         overview.viewTree();
+        $('#overview a').contextmenu(function(event){
+            ui.rightClicked = this;
+            //First load the correct menu
+            $('#popup').html(
+                "<span onclick='overview.removeItem()'><i class=\"fas fa-trash-alt\"></i>&nbsp;Remove Item</span>"  
+            );
+            //Now show the popup menu
+            $('#popup').show().offset({top: event.pageY, left: event.pageX});
+        });
+        
+    }
+
+    /**
+     * Removes the provided item from the disk and itemlist
+     */
+    overview.removeItem = function(){
+        console.log(ui.rightClicked);
     }
 
     /**
