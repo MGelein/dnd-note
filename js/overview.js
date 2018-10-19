@@ -18,6 +18,14 @@ var overview = {};
     }
 
     /**
+     * Updates the overview
+     */
+    overview.update = function(){
+        io.makeTree("../");
+        overview.viewTree();
+    }
+
+    /**
      * The visualization of the visible tree
      */
     overview.viewTree = function () {
@@ -81,6 +89,8 @@ var overview = {};
                 event.stopPropagation();
                 return false;
             }
+        }).blur(function(){//Also remove on blur
+            $('#newFile').remove();
         });
     }
 
@@ -90,12 +100,31 @@ var overview = {};
     overview.makeNewFile = function(){
         //Get the data from the newfile span
         let fileName = $('#newFile span').html().trim();
+        let folderUrl = $('#newFile').parent().parent().find('a').first().attr('href');
         //Now remove it
         $('#newFile').remove();
         //After that check if the length is ok
         if(fileName.length == 0) return;
-        //If so, let's continue
-        console.log("Making file: " + fileName);
+        //If so, let's continue, if the name has no extension, it's a folder
+        //First see where, if it is there, the extension is
+        let index = fileName.lastIndexOf(".");
+        let isFolder = index < 0;
+        //Now grab the extension
+        let ext = fileName.substr(index);
+        if(isFolder){
+            io.makeDir(folderUrl + "/" + fileName);
+        }else{
+            //Check extension, if it is .md open it, else just leave it
+            if(ext === '.md'){
+                io.save(folderUrl + "/" + fileName, "");
+            }else{
+                //On other extensions, ignore for now
+            }
+        }
+        //If we have done this, update overview anyway
+        overview.update();
+        //Now check if we can also open it
+        if(!isFolder && ext === '.md') editor.load(folderUrl + "/" + fileName);
     }
 
     /**

@@ -22,11 +22,19 @@ var io = {};
     }
 
     /**
+     * Creates a directory at the specified location
+     */
+    io.makeDir = function(name){
+        fs.mkdirSync(name);
+    }
+
+    /**
      * Loads the file designated by the provided url
      * @param {String} url 
      */
     io.load = function(url){
-        return fs.readFileSync(url, 'utf-8');
+        if(fs.existsSync(url)) return fs.readFileSync(url, 'utf-8');
+        else return undefined;
     }
 
     /**
@@ -103,7 +111,7 @@ var io = {};
         if(index < 1) return false;
         //Now grab the extension
         let ext = file.substr(index);
-        let extIndex = [".jpg", ".jpeg", ".png", "bmp", "gif", ".svg"].indexOf(ext.toLowerCase().trim());
+        let extIndex = [".jpg", ".jpeg", ".png", ".bmp", ".gif", ".svg"].indexOf(ext.toLowerCase().trim());
         //If the extension was in the whitelist, return true
         return (extIndex != -1);
     }

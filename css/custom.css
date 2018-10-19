@@ -43,6 +43,10 @@ Bootstrap overrides
 /**
 Custom Classes
 **/
+.disabled{
+    background-color: rgba(140, 201, 236, 0.308);
+}
+
 .folderControls{
     float: right;
     padding-right: 8px;

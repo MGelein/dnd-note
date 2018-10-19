@@ -40,6 +40,13 @@ var editor = {};
         ini.set("lastFile", url);
         //Start loading the file
         let file = io.load(url);
+        //Check if we have to disable or enable the file screen
+        if (file === undefined) {
+            file = "";
+            $('#editor').addClass('enabled');
+        } else {
+            $('#editor').removeClass('disabled');
+        }
         $('#editor').val(file);
         //Reset the updateTimeouts
         ui.updateTimeout = [];
@@ -47,12 +54,14 @@ var editor = {};
         ui.updatePreview();
         //Also look for this file in overview and highlight (removing older highlights)
         $('#overview a').removeClass("currentFile");
-        $('#overview a[href="' + url  + '"').addClass("currentFile");
+        $('#overview a[href="' + url + '"').addClass("currentFile");
         //Also expand the folder containing this file, keep expanding untill it's visible
         var expand = $('#overview .currentFile').parent();
-        while(!$('#overview .currentFile').is(":visible")){
-            expand.show();
-            expand = expand.parent();
+        if ($('.currentFile').length >= 1) {
+            while (!$('#overview .currentFile').is(":visible")) {
+                expand.show();
+                expand = expand.parent();
+            }
         }
     }
 
