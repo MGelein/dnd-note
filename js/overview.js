@@ -22,7 +22,7 @@ var overview = {};
     overview.update = function(){
         io.makeTree("../");
         overview.viewTree();
-        $('#overview a').contextmenu(function(event){
+        $('#overview a[ondragstart]').contextmenu(function(event){
             ui.rightClicked = this;
             //First load the correct menu
             $('#popup').html(
@@ -38,7 +38,9 @@ var overview = {};
      * Removes the provided item from the disk and itemlist
      */
     overview.removeItem = function(){
-        console.log(ui.rightClicked);
+        let url = $(ui.rightClicked).attr('href');
+        io.removeFile(url);
+        overview.update();
     }
 
     /**

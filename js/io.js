@@ -93,6 +93,14 @@ var io = {};
     }
 
     /**
+     * Removes the file signified by the provided url
+     * @param {String} url the file to reove
+     */
+    io.removeFile = function(url){
+        fs.unlinkSync(url);
+    }
+
+    /**
      * Checks to see if the extension of the provided file
      * matches any of the allowed extensions
      * @param {String} file 
